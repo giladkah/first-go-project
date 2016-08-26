@@ -10,6 +10,8 @@ import (
     "strconv"
 )
 
+var DATABASE_URL="postgres://zrignllzsdgbag:bWnOVLFE56ft64bapy8jqxSGMN@ec2-50-17-255-6.compute-1.amazonaws.com:5432/d75ke2kn7q34df"
+
 var dbmap = initDb()
 
 func main(){
@@ -86,7 +88,7 @@ func ArticlePost(c *gin.Context) {
 }
 
 func initDb() *gorp.DbMap {
-    db, err := sql.Open("sqlite3", "db.sqlite3")
+    db, err := sql.Open("postgres", DATABASE_URL)    
     checkErr(err, "sql.Open failed")
 
     dbmap := &gorp.DbMap{Db: db, Dialect: gorp.SqliteDialect{}}
